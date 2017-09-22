@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Teste</title>
+</head>
+<body>
+	<canvas id="viewport" width="500" height="500"></canvas>
+</body>
+<script type="text/javascript">
+
+	var canvas = document.getElementById("viewport");
+
+	var ctx = canvas.getContext("2d");
+	
+	var image = new Image();
+	image.src = "imagem.png";
+	image.onload = function(){
+		ctx.drawImage(image, 0, 0);
+		console.log(canvas.toDataURL());
+	}
+
+</script>
+</html>
