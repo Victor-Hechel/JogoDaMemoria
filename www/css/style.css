@@ -1,0 +1,50 @@
+.card{
+	background-color: #042A2B;
+	color: #CDEDF6;
+}
+
+body{
+	background-color: #5EB1BF;
+}
+
+.col.s12 > .btn {
+   width: 100%;
+}
+
+.card-title{
+	text-align: center;
+}
+
+.row{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+
+.card-content{
+	padding: 0;
+	margin: 0;
+}
+
+.errorMessage{
+	background-color: #D84727;
+	color: white;
+	text-align: center;
+	border-radius: 20px;
+	padding: 10px;
+}
+
+label:after {
+    transition-property: all !important;
+    font-size: 0.8rem;
+    transform: none;
+    width: 100%;
+    text-align: right;
+}
+label:not(.active):after {
+    transform: translateY(-140%);
+}
+
+.spinner-layer{
+	border-color: white;
+}

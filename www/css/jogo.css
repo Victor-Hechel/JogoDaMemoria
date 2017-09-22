@@ -1,0 +1,64 @@
+.btn{
+	width: 100%;
+}
+
+body{
+	width: auto;
+}
+
+.s3{
+	position: relative;
+}
+
+.card-content{
+	/*position: relative;
+	transform: translateY(15%);*/
+}
+
+.absoluto{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+}
+
+#preloaders{
+	display: none;
+}
+
+table{
+	width: 100%;
+	height: auto;
+}
+
+div[virado=true] img{
+	height: 100%;
+	width: auto;
+	position: absolute;
+	top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+}
+
+.posicoes{
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+
+.posicoes video{
+	max-height: 100%;  
+    max-width: 100%; 
+    width: auto;
+    height: auto;
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;
+}

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+	<title>Meus Pares</title>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/materialize.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/menu.css">
+
+	<script type="text/javascript">
+		$(function(){
+
+    		$('select').material_select();
+
+  		});
+       
+
+	</script>
+
+	<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+	<script src="js/fire.js" type='text/javascript'></script>
+
+	<script type="text/javascript" src="js/cadastrarParesErros.js"></script>
+	<script type="text/javascript" src="js/errorMessage.js"></script>
+
+
+	<script type="text/javascript" src="js/excluirPares.js"></script>
+	<script type="text/javascript" src="js/categoria.js"></script>
+	<script type="text/javascript" src="js/editarPar.js"></script>
+	<script type="text/javascript" src="js/cadastraPar.js"></script>
+	<script type="text/javascript" src="js/listaPares.js"></script>
+	<script type="text/javascript" src="js/carregaParesJogo.js"></script>
+	<script type="text/javascript" src="js/jogoForm.js"></script>
+
+
+	<script type="text/javascript">
+		$(function(){
+			$(document).on("click", "#pog", function(){
+				firebase.auth().signOut();
+				window.location.href = 'index.html';
+			});
+		});
+	</script>
+	
+</head>
+<body>
+	<div>
+
+<!--tela dos meus pares -->
+		<div class="container" id="meusPares">
+			<div class="row">
+				<div class="col s12">
+					<h1 class="header center">Meus Pares</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<div class="card">
+						<div class="card-content">
+							<div id="pares"></div>
+							<div id="aviso"></div>
+							<div class="center-align">
+								<div class='preloader-wrapper small active'>
+									<div class='spinner-layer'>
+	      						  		<div class='circle-clipper left'>
+	      						  			<div class='circle'></div>
+	      						  		</div>
+	      						  		<div class='gap-patch'>
+	        					  			<div class='circle'></div>
+	        					  		</div>
+	        					  		<div class='circle-clipper right'>
+	        					  			<div class='circle'></div>
+	      					 			</div>
+	      					 		</div>
+	      					 	</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button id="pog">Deslogar</button>
+
+			<div id="modalDelete" class="modal">
+			    <div class="modal-content">
+			    	<h4>Excluir</h4>
+			    	<p>Você tem certeza que deseja excluir o par?</p>
+			    </div>
+			    <div class="modal-footer">
+			    	<a href="#!" class="modal-action modal-close waves-effect btn-flat" id="excluir">Excluir</a>
+			    	<a href="#!" class="modal-action modal-close waves-effect btn-flat" id="resetExcluir">Voltar</a>
+			    </div>
+			</div>
+
+			<div id="modalEditar" class="modal">
+			    <div class="modal-content">
+			    	<h4>Editar</h4>
+			    	<div class="row">
+					    <form class="col s12" id='editarForm'>
+					      	<div class="row">
+					        	<div class="input-field col s12">
+							        <label for="editPalavra">Palavra</label>
+									<input id="editPalavra" name="editPalavra" type="text" placeholder="Digite a palavra...">
+									<div class="editPalavra"></div>
+						        </div>
+					      	</div>
+					      	<div class="row">
+					       	 	<div class="input-field col s12">
+					          		<h5>Categorias</h5>
+					          		<select id="editCategorias"></select>
+					          		</div>
+					        	</div>
+					      	</div>
+					      	<div class="row">
+					       	 	<div class="file-field input-field col s6">
+				       	 			<div class="btn waves-effect">
+				       	 				<span>Imagem</span>
+				          				<input id="editFoto" name="foto" type="file" data-for='img' class="validate" accept="image/*">
+				       	 			</div>
+				       	 			
+					        	</div>
+					        	<div class="file-field input-field col s6">
+				       	 			<div class="btn waves-effect">
+				       	 				<span>Vídeo</span>
+					        	  		<input id="editVideo" name="video" type="file" data-for='video' class="validate" accept="video/*">
+				       	 			</div>
+					        	</div>					  
+					      	</div>
+					      	<div class="row">
+					       	 	<div class="file-field input-field col s12">
+				       	 			<img class="responsive-img">
+					        	</div>
+					        	<div class="file-field input-field col s12">
+				       	 			<video class="responsive-video" controls></video>
+					        	</div>					  
+					      	</div>
+					      	<div class="row">
+					      		<div class="input-field col s12">
+									<button class="btn waves-effect waves-light" type="button" id="editar" name="action">Editar Par</button>
+								</div>
+					      	</div>
+					    </form>
+					</div>
+			    </div>
+			</div>
+
+		</div>
+
+
+<!--Tela de cadastrar pares de usuários -->
+		<div class="container" id="cadastrarPar">
+			<div class="row">
+				<div class="col s12">
+					<h1 class="header center">Adicionar Par</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<div class="card">
+						<div class="card-content" id="card">
+
+							<div class="row">
+							    <form id='cadastroForm' class="col s12">
+							      	<div class="row" id="ajuste">
+							        	<div class="input-field col s12">
+							        		<label for="palavra">Palavra</label>
+									        <input id="palavra" name="palavra" type="text" placeholder="Digite a palavra...">
+									        <div class="palavra"></div>
+
+								        </div>
+							      	</div>
+							      	<div class="row">
+							       	 	<div class="input-field col s12">
+							          		<h5 class="center">Categoria</h5>
+							          		<select id="categorias">
+
+							          		</select>
+							          		<button class="btn waves-effect waves-light" id="addCategoria" type="button" name="action">Adicionar categoria</button>
+							        	</div>
+							      	</div>
+							      	<div class="row">
+							       	 	<div class="file-field input-field col s6">
+						       	 			<i class="material-icons prefix formatado">perm_media</i>
+						       	 			<div class="btn full-width waves-effect">
+						       	 				<span>Imagem</span>
+						          				<input id="foto" name="foto" type="file" data-for='fotoPreview' class="validate" accept="image/*">
+						       	 			</div>
+						       	 			
+							        	</div>
+							        	<div class="file-field input-field col s6">
+						       	 			<i class="material-icons prefix formatado">perm_media</i>
+						       	 			<div class="btn full-width waves-effect">
+						       	 				<span>Vídeo</span>
+							        	  		<input id="video" name="video" type="file" data-for='videoPreview' class="validate" accept="video/*">
+						       	 			</div>
+							        	</div>					  
+							      	</div>
+							      	<div class="row">
+							       	 	<div class="file-field input-field col s6">
+						       	 			<img class="responsive-img mediaPreview" id="fotoPreview">
+							        	</div>
+							        	<div class="file-field input-field col s6">
+						       	 			<video class="responsive-video mediaPreview" id="videoPreview" controls></video>
+							        	</div>					  
+							      	</div>
+							      	<div class="row">
+							      		<div class="input-field col s12">
+											<button class="btn waves-effect waves-light" id='submit' type="button" name="action">Enviar Par</button>
+										</div>
+							      	</div>
+							    </form>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="modalCategoria" class="modal">
+		    <div class="modal-content">
+		    	<h4 class="center">Adicionar Categoria</h4>
+		    	<div class="row">
+				    <form class="col s12" id='categoriaForm'>
+				      	<div class="row">
+				        	<div class="input-field col s12">
+						        <label for="categoria">Palavra</label>
+								<input id="categoria" name="categoria" type="text" placeholder="Digite a categoria...">
+								<div class="categoria"></div>
+					        </div>
+				      	</div>
+				      	
+				      	
+				      	<div class="row">
+				      		<div class="input-field col s12">
+								<button class="btn waves-effect waves-light" type="button" name="action">Adicionar Categoria</button>
+							</div>
+				      	</div>
+				    </form>
+				</div>
+		    </div>
+		</div>
+
+<!-- tela do jogo -->
+		<div class="container" id="jogo">
+			<div class="row">
+				<div class="col s12">
+					<h1 class="header center">Jogar</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<div class="card">
+						<div class="card-content">
+							<div id="errorMessage"></div>
+
+							<div class="row">
+					       	 	<div class="input-field col s12">
+					       	 		<h5 class="center">Categoria</h5>
+					       	 		<select name="categorias">
+					       	 			
+					       	 		</select>
+					        	</div>
+					      	</div>
+
+					      	<div class="row">
+					       	 	<div class="input-field col s12">
+					          		<h5 class="center">Número de pares</h5>
+					          		<select name="tamanhos">
+					          			<option value="6">6 pares</option>
+					          			<option value="10">10 pares</option>
+					          			<option value="12">12 pares</option>
+					          			<option value="14">14 pares</option>
+					          		</select>
+					        	</div>
+					      	</div>
+
+					      	<div class="row">
+					       	 	<div class="input-field col s12">
+					          		<h5 class="center">Jogar com pares de outros jogadores</h5>
+					          		<select name="tipo_pares">
+					          			<option value="0">Jogar com meus pares</option>
+					          			<option value="1">Jogar com pares de outros jogadores</option>
+					          		</select>
+					        	</div>
+					      	</div>
+
+					      	<div class="row">
+					      		<div class="input-field col s12">
+					      			<button class="btn waves-effect waves-light" type="button" id="jogar" name="action">Jogar</button>
+					      		</div>
+					      	</div>
+					    </div>
+					</div>
+				</div>
+			</div>		
+		</div>
+	
+		<ul id="tabs" class="tabs bottom">
+		    <li class="tab col s4"><a href="#cadastrarPar"><i class="material-icons white-text">library_add</i></a></li>
+		    <li class="tab col s4"><a href="#meusPares" class="active"><i class="material-icons white-text" class="white">view_headline</i></a></li>
+		    <li class="tab col s4"><a href="#jogo"><i class="material-icons white-text" class="white">games</i></a></li>
+	  	</ul>
+
+	</div>
+		
+</body>
+</html>

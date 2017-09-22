@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+
+	<title>Index</title>
+
+
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/home.css">
+
+	<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+	<script src="js/fire.js" type='text/javascript'></script>
+
+	<script src="js/errorMessage.js" type='text/javascript'></script>
+	<script src="js/home.js" type='text/javascript'></script>
+
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<h1 class="header center">Jogo da Memória</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12">
+				<div class="card">
+					<div class="card-content" id="card">
+						<span class="card-title center"><h4>Realize seu login</h4></span>
+						<div id="errorMessage"></div>
+						<div class="row">
+						    <form class="col s12">
+						      	<div class="row">
+						        	<div class="input-field col s12">
+						          		<i class="material-icons prefix">account_circle</i>
+								        <input id="login" name="login" type="text" class="validate">
+								        <label for="login">Email</label>
+							        </div>
+						      	</div>
+						      	<div class="row">
+						       	 	<div class="input-field col s12">
+						          		<i class="material-icons prefix">lock_outline</i>
+						          		<input id="senha" name="senha" type="password" class="validate">
+						          		<label for="senha">Senha</label>
+						        	</div>
+						      	</div>
+						      	<div class="row">
+						      		<div class="input-field col s12">
+										<button class="btn waves-effect waves-light" type="button" id="submit" name="action">Logar</button>
+									</div>
+						      	</div>
+						    </form>
+						</div>
+
+					</div>
+
+					<div class="card-action">
+						<span class="card-title center"><h5>Não possui conta?</h5></span>
+
+						<div class="row">
+							<div class="input-field col s12">
+								<a class="btn waves-effect waves-light" href="cadastroUser.html" name="action">Criar conta</a>
+							</div>
+						</div>					
+					</div>
+
+					<div class="card-action">
+						<div class="row">
+							<div class="input-field col s12">
+								<a class="btn waves-effect waves-light" href="jogoForm.html" name="action">Jogar</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
