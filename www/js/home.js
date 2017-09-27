@@ -1,7 +1,7 @@
 $(function(){
 	const auth = firebase.auth();
 
-	auth.signOut();
+	//auth.signOut();
 
 	$(document).on("click", "#submit", function(){
 		const email = $("#login").val();
@@ -11,7 +11,6 @@ $(function(){
 		auth.signInWithEmailAndPassword(email, senha).catch(function(err){
 		
 			if (err) {
-				console.log(err);
 				showErrorMessage(err);
 			}
 		});
@@ -20,10 +19,7 @@ $(function(){
 
 	auth.onAuthStateChanged(function(user){
 		if (user) {
-			console.log("hell yeah");
 			window.location.href = "menu.html";
-		}else{
-			console.log("deu ruim");
 		}
 	});
 });

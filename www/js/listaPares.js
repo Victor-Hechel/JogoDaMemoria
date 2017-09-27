@@ -6,20 +6,23 @@ $(function(){
 
 
 	firebase.auth().onAuthStateChanged(function(user){
+		if(user != null){
+			var database = firebase.database();
+			usuario_atual = firebase.auth().currentUser.uid;
 
-		var database = firebase.database();
-		usuario_atual = firebase.auth().currentUser.uid;
+			var ref = database.ref("users").child(usuario_atual).child("meusPares").orderByKey().limitToFirst(1);
 
-		var ref = database.ref("users").child(usuario_atual).child("meusPares").orderByKey().limitToFirst(1);
-
-		ref.once('value', function(data){
-			if (data.val() != null) {
-				chave_ref = Object.keys(data.val())[0];
-				carregaPares();
-			}else{
-				addInserirParesMessage();
-			}
-		});
+			ref.once('value', function(data){
+				if (data.val() != null) {
+					chave_ref = Object.keys(data.val())[0];
+					carregaPares();
+				}else{
+					addInserirParesMessage();
+				}
+			});
+		}else{
+			window.location.href = "index.html";
+		}
 
 	});
 
@@ -83,7 +86,6 @@ function carregaPares(){
 }
 
 function verificaParesRestantes(){
-	console.log(paresAtuais);
 	if (Object.keys(paresAtuais).length == 0) {
 		addInserirParesMessage();
 	}
