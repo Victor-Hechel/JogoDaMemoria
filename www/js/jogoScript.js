@@ -194,7 +194,7 @@ $(function(){
 	        	$(element).parent().height(height);
 	        	$(element).height(height);
 
-	            element.innerHTML = "<video class='carta responsive-video' src='" + pares[numero].vid + "' controls autoplay muted></video>";
+	            element.innerHTML = "<video class='carta responsive-video video-js' data-setup='{}' src='" + pares[numero].vid + "' controls autoplay muted></video>";
 	        }
 	        
 	       	
