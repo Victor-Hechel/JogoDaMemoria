@@ -1,5 +1,5 @@
 $(function(){
-
+    //validação de formulário
 	$.validator.setDefaults({
         errorClass: 'invalid',
         errorPlacement: function (error, element) {
@@ -65,6 +65,7 @@ $(function(){
 
 		const validator = $( "#myForm" ).validate();
 
+		//verifica se o formulário está correto
 		if (validator.form()) {
 			const nome = $("#nome").val();
 			const nascimento = $("#nascimento").val();
@@ -75,16 +76,23 @@ $(function(){
 
 			const auth = firebase.auth();
 
+
+			//animação de loading
 			$("#submit").html("<div class='preloader-wrapper small active'><div class='spinner-layer '>"+
       						  "<div class='circle-clipper left'><div class='circle'></div></div><div class='gap-patch'>"+
         					  "<div class='circle'></div></div><div class='circle-clipper right'><div class='circle'></div>"+
       					 	  "</div></div></div>");
 
+			//cria o usuário e retorna um objeto do usuário cadastrado
 			auth.createUserWithEmailAndPassword(email, senha).then(function(user){
+
+				//objeto de banco de dados do firebase
 				const database = firebase.database();
+
 
 				const refCategoria = database.ref("categorias");
 
+				//adiciona as categorias padrão na conta do usuário
 				refCategoria.on('value', function(data){
 					const userObj = {
 						nome: nome,
@@ -113,8 +121,6 @@ $(function(){
 	firebase.auth().onAuthStateChanged(function(user){
 		if (user) {
 			window.location.href = "menu.html";
-		}else{
-			window.location.href = "index.html";
 		}
 	});
 });

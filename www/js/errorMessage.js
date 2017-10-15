@@ -1,3 +1,4 @@
+//script para gerenciar erros em geral
 function showErrorMessage(error){
 	const message = verificaErro(error.code);
 	if($("#errorMessage").html() == ""){

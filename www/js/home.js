@@ -1,4 +1,5 @@
 $(function(){
+	//objeto de autenticação de usuarios do Firebase
 	const auth = firebase.auth();
 
 	//auth.signOut();
@@ -17,7 +18,10 @@ $(function(){
 
 	});
 
+
+	//verifica se o usuário está logado
 	auth.onAuthStateChanged(function(user){
+		//se entrar no if está logado
 		if (user) {
 			window.location.href = "menu.html";
 		}

@@ -1,12 +1,14 @@
 $(function(){
 	var clicadoEditar = null;
 
+	//abre o Modal para editar
 	$(document).on("click", ".btnEditar", function(){
 		clicadoEditar = $(this).attr("data-id");
 		prepararModal();
     	$("#modalEditar").openModal();
     });
 
+	//carrega as informações do Modal
     function prepararModal(){
     	const obj = paresAtuais[clicadoEditar];
     	$("#editPalavra").val(obj["nome"]);
@@ -41,6 +43,7 @@ $(function(){
 				const auth = firebase.auth();
 				const database = firebase.database();
 
+				//pega o par antigo
 				const oldObj = paresAtuais[clicadoEditar];
 
 				var data = {
@@ -59,6 +62,7 @@ $(function(){
 
 				var complete = 0;
 
+				//caso o usuário não tenha informado uma nova imagem continua a antiga
 				if (fotoFile == undefined) {
 					data.img = oldObj.img;
 					complete++;
@@ -120,6 +124,7 @@ $(function(){
 		$('#modalEditar').closeModal();
 	}
 
+	//muda as informações do elemento da lista
 	function changeItem(data){
 		$("#"+clicadoEditar+" h5").text(data.nome);
 		$("#"+clicadoEditar+" h6").text("Categoria: " + data.categoria);

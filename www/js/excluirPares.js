@@ -1,10 +1,12 @@
 $(function(){
 	var clicado = null;
+	//abre o Modal ao clicar em excluir
 	$(document).on("click", ".btnExcluir", function(){
 		clicado = $(this).attr("data-id");
     	$('#modalDelete').openModal();
     });
 
+	//Exclui o par e remove da lista
     $(document).on("click", "#excluir", function(){
     	const pai = $("#"+clicado);
 
