@@ -1,5 +1,5 @@
-//script para genrenciar as mensagens de erro dos pares
 function mostrarErro(erro, id){
+	console.log("hey");
 	const elemento = $("."+id); 
 	if (!temMensagem(elemento)) {
 		const elementoMensagemErro = "<p class='inputError'>" + erro + "</p>";

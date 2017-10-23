@@ -10,7 +10,7 @@ $(function(){
 
 
 	$(document).on("click", "#jogar", function(){
-		//verifica se está carregando os pares
+
 		if (!processando) {
 			proocessando = true;
 			this.innerHTML = "<div class='preloader-wrapper small active'><div class='spinner-layer '>"+
@@ -22,10 +22,8 @@ $(function(){
 			const tamanho = $("select[name='tamanhos']").val();
 			const tipo_pares = $("select[name='tipo_pares']").val();
 
-			//chama o método que está em outro arquivo
 	        carregaParesJogo(categoria, tipo_pares).then(function(data){
 		        if (data) {
-		        	//pares insuficientes
 		            if (Object.keys(data).length < tamanho) {
 		            	const error = {
 		            		code: 'game/poucos-pares'
@@ -34,7 +32,7 @@ $(function(){
 		                $("#jogar").text("Jogar");
 		                processando = false;
 		            }else{
-		            	//configurações do jogo
+
 		                const gameConfig = {
 		                	categoria: categoria,
 		                	tamanho: tamanho,
@@ -48,7 +46,6 @@ $(function(){
 		                	pares[i] = data[chaves[i]];
 		                }
 
-		                //armazena no localStorage as informações dos pares e a configuração
 		                localStorage.setItem("pares", JSON.stringify(pares));
 		                localStorage.setItem("gameConfig", JSON.stringify(gameConfig));
 

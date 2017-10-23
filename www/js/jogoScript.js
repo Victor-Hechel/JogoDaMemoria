@@ -31,9 +31,7 @@ $(function(){
 		});
 	});
 	
-	//quando o usuário clica em algum par
     $(document).on("click", ".card-content .col", function(){
-    	//verifica se já selecionou duas
     	if (selecionadas.length == 2) {
     		limpa(estado);
     	}
@@ -75,8 +73,6 @@ $(function(){
 		$(".card-content").html(spinner);
 	}
 
-
-	//carrega previamente os arquivos
 	function preCarregar(){
 		const preloaders = document.getElementById("preloaders");
 		preloaders.innerHTML = "";
@@ -95,7 +91,6 @@ $(function(){
 			}
 
 			if (mediasCarregadas == pares.length*2) {
-				//é chamado assim que todas os vídeos e fotos forem carregados
 				montar();
 			}
 		}
@@ -123,7 +118,6 @@ $(function(){
 	    var linhas, colunas,change = "", tipoCol;
 
 
-	    //verifica quantas linhas e colunas serão de acordo com o tamanho
 	    switch(gameConfig.tamanho){
 	        case "6":  linhas = 3;
 	                   colunas = 4;
@@ -135,10 +129,8 @@ $(function(){
 	    }    
 	    
 	    var count = 0;
-
 	    //vetor para saber quantas vezes cada par foi posicionado
-
-	    // posicionados = [];
+	    posicionados = [];
 
 	    var num_pos = 0;
 
@@ -159,7 +151,6 @@ $(function(){
 	    
 	    var posicoes = document.getElementsByClassName("posicoes");
 	    
-	    //relaciona os pares com as posições e tbm diz se é um vídeo ou uma imagem
 	    var vezes = 0;
 	    while(count < gameConfig.tamanho){
 	        var random_num = parseInt(Math.random()*(gameConfig.tamanho*2));
@@ -186,12 +177,10 @@ $(function(){
     function joga(element){
     	const height = $(element).parent().height();
 	    var numero = $(element).attr("data-id");
-	    //verifica se a imagem está virada e se é complementar a já selecionada
 	    if ($(element).attr("virado") == 'false' && 
 	    	($(element).attr("data-ext") != $(selecionadas[0]).attr("data-ext") || selecionadas.length == 0)){
 	        var item = element.children[0];
 	        var ext = element.getAttribute("data-ext");
-	        //mostra a carta e ajeita o tamanho para ficar responsivo
 	        if (ext == 0) {
 	            item.src = pares[numero].img;
 
@@ -211,24 +200,19 @@ $(function(){
 	       	
 	        $(element).attr("virado", true);
 	        selecionadas[selecionadas.length] = element;
-	        //caso tenha virado duas cartas
 	        if (selecionadas.length === 2){
-	        	//muda o fundo para vermelho se estiver errado
 	            if ($(selecionadas[0]).attr("data-id") !== $(selecionadas[1]).attr("data-id")){
 	            	$(".card").css("background-color", "red");
 	            	estado = false;
-	            //muda para verde se estiver certo
 	            }else{
 	                viradas++;
 	                $(".card").css("background-color", "green");
 	                estado = true;
-	                //mostra o botão para as informações
 	            	for (var i = 0; i < 2; i++) {
 	                	selecionadas[i].parentElement.innerHTML += "<div class='fixed-action-btn absoluto btnInfo' data-id="+$(selecionadas[i]).attr('data-id')+">" +
 									    			 "<a class='btn-floating btn-small waves-effect'>"+
 									      			 " <i class='material-icons'>menu</i></a></div>";
 	            	}
-	            	//caso tenha virado todas as cartas
 	                if (viradas === pares.length){
 	                	limpa(true);
 	                    venceu();
@@ -239,12 +223,10 @@ $(function(){
 	    }
 	}
 
-	//muda o background para a cor comum e desvira os pares selecionados
 	function limpa(estado){
 		$(".card").first().css("background-color", "#042A2B");
 		if (estado == false) {	
 		    for (var i = 0; i < selecionadas.length; i++) {
-		    	console.log(selecionadas);
 		    	var element = $(selecionadas[i]);
 		        element.attr("virado", false);
 		        if (element.attr("data-ext") == '0') {
@@ -258,7 +240,6 @@ $(function(){
 
 	}
 
-	//carrega as informações do Modal de informações do par
 	function carregaModal(id){
 		const par = pares[id];
 		$(".modal h4").text(par.nome);
@@ -275,7 +256,6 @@ $(function(){
 		}
 	}
 
-	//mostra a mensagem de vitória e o menu de próximas opções
 	function venceu(){
 	    document.getElementsByTagName("h4")[0].innerHTML = "Você Venceu!";
 

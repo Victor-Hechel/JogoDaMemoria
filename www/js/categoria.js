@@ -33,7 +33,6 @@ $(function(){
 		var element = $("#categoria").first();
 		var categoria = element.val();
 
-		//faz validação da categoria que o usuário deseja cadastrar
 		const promise = new Promise(function(resolve, reject){
 			if (categoria.length == 0 || categoria.length > 20) {
 
@@ -88,15 +87,12 @@ function carregaCategorias(element){
 
 		var ref = database.ref();
 
-		//caso o usuário não esteja logado vai carregar as categorias padrão
 		if (auth.currentUser == null) {
-			ref = ref.child("categorias");
-		//caso o usuário esteja vai carregar os padrões + os do próprio usuário		
+			ref = ref.child("categorias");	
 		}else{
 			ref = ref.child("users").child(auth.currentUser.uid).child("minhasCategorias");
 		}
 
-		//carrega as categorias
 		ref.on("child_added", function(data){
 			const obj = data.val();
 			element.append($("<option>", {

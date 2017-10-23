@@ -1,4 +1,3 @@
-//script responsável por carregar os pares do jogo de acordo com as especificações do usuário
 function carregaParesJogo(categoria, tipo_pares){
 	return new Promise(function(resolve, reject){
 		const auth = firebase.auth();

@@ -2,8 +2,6 @@ $(function(){
 	video = null;
 	imagem = null;
 
-
-	//começam os métodos para gerenciar o display das imagens e vídeos
 	function verificaSource(elemento){
 		const preview = $("#" + elemento.attr("data-for"));
 		if (!temSource(preview)){
@@ -37,26 +35,23 @@ $(function(){
 	  		$("#"+source.attr("data-for")).attr("src", URL.createObjectURL(this.files[0]));
 	  	}
 	});
-	//terminam esses métodos
+
 
 	var valida;
 	var processo = false;
 
-	//quando o usuário muda a palavra digitada o código verifica
 	$(document).on("change", "#palavra", verificaNome);
 
 	$(document).on("click", "#submit", function(){
 		const submit = $("#submit");
-		//verifica se já não está carregando
 		if (submit.text() == "Enviar Par") {
 
-			//adiciona loading
 			this.innerHTML = "<div class='preloader-wrapper small active'><div class='spinner-layer '>"+
       						  "<div class='circle-clipper left'><div class='circle'></div></div><div class='gap-patch'>"+
         					  "<div class='circle'></div></div><div class='circle-clipper right'><div class='circle'></div>"+
       					 	  "</div></div></div>";
 
-      		//verifica se está tudo preenchido corretamente
+
 			if(verifica()){
 				const auth = firebase.auth();
 				const database = firebase.database();
@@ -68,10 +63,9 @@ $(function(){
 					vid: null,
 					user: null
 				};
-				//adiciona o par
+				console.log(firebase.auth().currentUser);
 				var myRef = ref.push(data);
 
-				//adiciona as imagens e vídeos
 				const storage = firebase.storage();
 
 				var storageRef = storage.ref("pares/" + auth.currentUser.uid + "/imagens/"+myRef.key);
@@ -84,15 +78,11 @@ $(function(){
 
 				task.on('state_changed', function(){}, function(){}, function(){
 					complete++;
-					//pega a url da imagem quando faz o upload
 					const url = task.snapshot.downloadURL;
 					console.log(url);
 					data["img"] = url;
-					//caso o upload do video e da imagem estaja concluído
 					if (complete == 2) {
 						//database.ref().child("novos").child(myRef.key).set(data);
-
-						//atualiza o usuário com os links e
 						let updates = {};
 						updates["pares/"+myRef.key] = data;
 						updates["users/"+auth.currentUser.uid+"/meusPares/"+myRef.key] = data;
@@ -131,7 +121,6 @@ $(function(){
 		
 	});
 
-	//validação do nome
 	function verificaNome(){
 		var element = $("#palavra").first();
 		var nome = element.val();
@@ -151,8 +140,6 @@ $(function(){
 				return false;
 			}
 		}
-
-		//verifica se a palavra já existe
 		const user = firebase.auth().currentUser;
 		const ref = firebase.database().ref().child("users").child(user.uid).child("meusPares").orderByChild("nome").equalTo(nome);
 
