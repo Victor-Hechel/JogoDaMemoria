@@ -113,8 +113,6 @@ $(function(){
 	firebase.auth().onAuthStateChanged(function(user){
 		if (user) {
 			window.location.href = "menu.html";
-		}else{
-			window.location.href = "index.html";
 		}
 	});
 });
