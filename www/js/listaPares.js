@@ -118,7 +118,7 @@ function adicionarParNaLista(data, chave){
 													    "<li><a class='btn-floating waves-effect btnEditar' data-id='"+chave+"'><i class='material-icons'>mode_edit</i></a></li>" +
 												 	    "</ul></div></div></div><div class='row'><div class='file-field input-field col s12'>" + 
 												        "<img class='responsive-img' src='"+data.img+"'></div><div class='file-field input-field col s12'>" + 
-												        "<video class='responsive-video' src='"+data.vid+"' controls muted></video></div></div></div></div>";
+												        "<iframe class='responsive-video' src='"+data.vid+"' controls muted></iframe></div></div></div></div>";
 	}
 
 	
